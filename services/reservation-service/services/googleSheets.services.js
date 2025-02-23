@@ -21,10 +21,10 @@ async function AddReservation (auth, dataForm){
         // Llama a la API para añadir los datos al final de la hoja
         const response = await service.spreadsheets.values.append(request)
 
-        if(response.status == 200){
+        if(response.status == 200 || response.status == 201 ){
             return dataForm
         }{
-            throw Error('No se pudo agregar los datos al excel')
+            throw new Error('No se pudo agregar los datos al excel')
         }
     } catch (e) {
         console.error("No se pudo realizar la persistencia de datos: ", e) 

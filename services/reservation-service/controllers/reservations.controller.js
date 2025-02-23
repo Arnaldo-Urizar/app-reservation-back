@@ -3,14 +3,6 @@ const authConfig = require("../config/googleApis.config")
 const AddReservation = require("../services/googleSheets.services")
 const sendEmail = require('../../notifications-service/app')
 
-const reservation = (req,res)=>{
-    try{
-        res.json({message: 'api funcionando'})   
-    }catch(e){
-        res.status(500).send({message: 'No se pudo completar la solicitud'})
-    }
-}
-
 const saveReservation = async (req,res)=>{
     const data = req.body
 
@@ -33,4 +25,4 @@ const saveReservation = async (req,res)=>{
     }
 }
 
-module.exports = {reservation,saveReservation}
+module.exports = {saveReservation}

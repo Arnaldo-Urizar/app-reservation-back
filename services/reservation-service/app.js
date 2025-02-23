@@ -14,5 +14,5 @@ const PORT = process.env.PORT;
 app.use('/',reservationRouters)
 
 app.listen(PORT,()=>{
-    console.log(`listening in port http://localhost:${PORT}`)
+    console.log(`listening in Port: ${PORT}. http://localhost:${PORT}`)
 })

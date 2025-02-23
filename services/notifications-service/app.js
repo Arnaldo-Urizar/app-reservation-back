@@ -12,18 +12,17 @@ const sendEmail = async(data, emailUser, emailPass)=>{
     })
 
     try {
-        const info = await transporter.sendMail({
+        await transporter.sendMail({
             from :emailUser,
-            to: data.email, // colocar correo cliente
+            to: data.email,
             subject: "Comprobante de Reserva",
-            text: `${data.customer} reservaste el
-            Día: ${data.date},
-            Hora: ${data.time},
-            Motivo: ${data.reason},
-            Personas: ${data.people}
+            text: `Hola ${data.customer}! Ya tenes reservado tu lugar.
+            📅 Día: ${data.date},
+            🕒 Hora: ${data.time},
+            🎯 Motivo: ${data.reason},
+            👥 Personas: ${data.people}
             `    
         })
-        console.log("Message sent:", info.messageId)       
     } catch (e) {
         console.error("No se pudo completar a accion: ",e)
     }
