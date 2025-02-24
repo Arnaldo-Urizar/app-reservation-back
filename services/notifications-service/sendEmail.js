@@ -3,7 +3,6 @@ const nodemailer = require('nodemailer')
 
 const emailUser = process.env.EMAIL_USER
 const emailPass = process.env.PASS
-console.log("email:", process.env.EMAIL_USER)
 
 const sendEmail = async(req,res)=>{
     try {
