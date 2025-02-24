@@ -4,7 +4,7 @@ const {createProxyMiddleware} = require('http-proxy-middleware');
 const cors = require('cors')
 
 const app = express()
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT
 
 app.use(cors());
  
@@ -15,5 +15,5 @@ app.use('/reservas', createProxyMiddleware({
 }))
 
 app.listen(PORT,()=>{
-    console.log(`Listening in http://localhost:${PORT}`)
+    console.log(`Listening in Port:${PORT}`)
 })
