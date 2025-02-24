@@ -1,7 +1,6 @@
 require('dotenv').config();  
 const authConfig = require("../config/googleApis.config")
 const AddReservation = require("../services/googleSheets.services")
-const sendEmail = require('../../notifications-service/app')
 
 const saveReservation = async (req,res)=>{
     const data = req.body
@@ -15,9 +14,16 @@ const saveReservation = async (req,res)=>{
             res.status(400).send({message: 'Faltan campos obligatorios'})
             return
         } 
-        const response = await AddReservation(authConfig,data)
-        await sendEmail(response, process.env.EMAIL_USER, process.env.PASS)
-        
+        const reservationCreated = await AddReservation(authConfig,data)
+
+        const response = await fetch (`${process.env.NOTIFICATIONS_SERVICE_URL}/sendemail`,({
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(reservationCreated)
+        }))
+        if (!response.ok) {
+            throw new Error('Error al enviar el correo');
+        }
         res.status(201).send({message:'solicitud exitósa', state: true});  
              
     } catch (e) {
